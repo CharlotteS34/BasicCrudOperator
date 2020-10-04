@@ -2,13 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BasicCrudOperator
 {
-    public class SqlCrudOperator<TModel, TEntity> : ICrudOperator<TModel> where TModel : class where TEntity : class
+    public class SqlDataFactory<TModel, TEntity> : IDataFactory<TModel> where TModel : class where TEntity : class
     {
-        public SqlCrudOperator(IConverter<TModel, TEntity> modelToEntity, IConverter<TEntity, TModel> entityToModel, IContext context)
+        public SqlDataFactory(IConverter<TModel, TEntity> modelToEntity, IConverter<TEntity, TModel> entityToModel, IContext context)
         {
             ModelToEntity = modelToEntity;
             EntityToModel = entityToModel;
@@ -47,5 +48,8 @@ namespace BasicCrudOperator
             context.SaveChanges();
             return EntityToModel.Convert(entity);
         }
+
+        public IEnumerable<TModel> GetAll()
+            => EntityToModel.ConvertMany(table.ToArray());
     }
 }

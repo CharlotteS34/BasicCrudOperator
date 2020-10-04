@@ -4,8 +4,9 @@ using System.Text;
 
 namespace BasicCrudOperator
 {
-    public interface IConverter<TInput, TOutput> where TInput : class where TOutput : class
+    public interface IConverter<TSource, TResult> where TSource : class where TResult : class
     {
-        TOutput Convert(TInput input);
+        TResult Convert(TSource input);
+        IEnumerable<TResult> ConvertMany(IEnumerable<TSource> sources);
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BasicCrudOperator
 {
-    public interface ICrudOperator<TModel> where TModel : class
+    public interface IDataFactory<TModel> where TModel : class
     {
         TModel Create(TModel model);
 
@@ -14,5 +14,7 @@ namespace BasicCrudOperator
         void Delete(object key);
 
         TModel GetByKey(object key);
+
+        IEnumerable<TModel> GetAll();
     }
 }
