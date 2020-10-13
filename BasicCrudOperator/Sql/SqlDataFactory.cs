@@ -16,10 +16,10 @@ namespace BasicCrudOperator
             this.context = context;
             table = context.DbContext.Set<TEntity>();
         }
-        private readonly IConverter<TModel, TEntity> ModelToEntity;
-        private readonly IConverter<TEntity, TModel> EntityToModel;
-        private readonly IContext context;
-        private DbSet<TEntity> table = null;
+        protected readonly IConverter<TModel, TEntity> ModelToEntity;
+        protected readonly IConverter<TEntity, TModel> EntityToModel;
+        protected readonly IContext context;
+        protected DbSet<TEntity> table = null;
         public TModel Create(TModel model)
         {
             var entity = ModelToEntity.Convert(model);
